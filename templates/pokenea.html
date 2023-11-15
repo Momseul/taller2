@@ -1,0 +1,17 @@
+{% from 'base64' import b64encode %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pokenea aleatorio</title>
+</head>
+<body>
+    {% if imagen_codificada %}
+        <img src="data:image/png;base64,{{ imagen_codificada }}" alt="Imagen del pokenea aleatorio">
+    {% else %}
+        <p>No hay imagen disponible</p>
+    {% endif %}
+    <p>{{ pokenea.frase_filosófica }}</p>
+    <p>{{ pokenea.id }}</p>
+</body>
+</html>
