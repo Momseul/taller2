@@ -1,22 +1,30 @@
-from flask import Flask, render_template
+import os
+import platform
+from flask import Flask
 from jinja2 import Environment
 from neas import Neas
 
-# Create a Jinja2 environment and register the custom filter
+# Jinja2 error
 env = Environment()
+
+
+system_info = platform.uname()
+container_id = system_info.node
+#container_id = os.uname()[1] 
 
 app = Flask(__name__)
 
 @app.route("/pokenea/json")
 def pokenea_json():
     nea = Neas()
-    json_pokenea = nea.mostrar_json()
+    json_pokenea = nea.mostrar_json(container_id)
     return json_pokenea
 
 @app.route("/pokenea/imagen_frase")
 def pokenea_imagen_frase():
     nea = Neas()
-    context = nea.mostrar_imagen_frase()
+    container_id = platform.uname().node
+    context = nea.mostrar_imagen_frase(container_id)
 
     if isinstance(context, dict):
         template = env.from_string("""
@@ -33,6 +41,7 @@ def pokenea_imagen_frase():
                 {% endif %}
                 <p>{{ context["pokenea"]["frase_filosófica"] }}</p>
                 <p>{{ context["pokenea"]["id"] }}</p>
+                <p>ID del Contenedor: {{ context["container_id"] }}</p>
             </body>
             </html>
         """)

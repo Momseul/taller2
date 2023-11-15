@@ -71,18 +71,19 @@ class Neas:
             },
         ]
 
-    def mostrar_json(self):
+    def mostrar_json(self, container_id):
         pokenea = random.choice(self.pokeneas)
         datos_pokenea = {
             "id": pokenea["id"],
             "nombre": pokenea["nombre"],
             "altura": pokenea["altura"],
             "habilidad": pokenea["habilidad"],
+            "container_id": container_id,
         }
         json_pokenea = json.dumps(datos_pokenea)
         return json_pokenea
 
-    def mostrar_imagen_frase(self):
+    def mostrar_imagen_frase(self, container_id):
         pokenea = random.choice(self.pokeneas)
         imagen_url = pokenea["imagen"]
 
@@ -96,6 +97,7 @@ class Neas:
                 return {
                     "pokenea": pokenea,
                     "imagen_codificada": imagen_codificada,
+                    "container_id": container_id,
                 }
             else:
                 return f"Error al obtener la imagen: {response.status_code}"
