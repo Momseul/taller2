@@ -24,4 +24,4 @@ jobs:
       run: docker build . --file Dockerfile --tag momseul/taller2:latest
       
     - name: Docker Push
-      run: docker push momseul/taller
+      run: docker push momseul/taller2
