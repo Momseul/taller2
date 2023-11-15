@@ -8,9 +8,9 @@ from neas import Neas
 env = Environment()
 
 
-system_info = platform.uname()
-container_id = system_info.node
-#container_id = os.uname()[1] 
+#system_info = platform.uname()
+#container_id = system_info.node
+container_id = os.uname()[1] 
 
 app = Flask(__name__)
 
